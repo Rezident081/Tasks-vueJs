@@ -1,0 +1,38 @@
+.app-header{
+    padding: 30px 0;
+    .time-component{
+        margin-left: 15px;
+        margin-right: 0;
+
+        .time{
+            border-bottom: 2px solid $pink-color;
+            padding: 12px;
+            text-align: center;
+            transition: .7s all;
+
+            span{
+                font-size: 23px;
+                font-weight: bold;
+
+                &:after{
+                    content: ":";
+                    padding: 0 10px;
+                    vertical-align: text-top;
+                }
+
+                &:last-child:after{
+                    content: none
+                }
+            }
+
+            &:hover{
+                background: $pink-color;
+                color: #fff;
+            }
+        }
+    }
+
+    .date-component{
+        padding: 17px 0;
+    }
+}

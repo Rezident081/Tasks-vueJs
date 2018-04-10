@@ -1,0 +1,14 @@
+@import "~bootstrap/scss/bootstrap-reboot.scss";
+
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+$font-family : 'Quicksand', sans-serif;
+
+@import "~bootstrap/scss/bootstrap";
+@import "~animate.css/animate.min.css";
+
+@import "./components/vars";
+@import "./components/global";
+@import "./components/header";
+@import "./components/main";
+@import "./components/aside";
+@import "./components/container";
