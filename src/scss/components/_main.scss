@@ -2,6 +2,39 @@
     .card{
         min-height: 250px;
         margin-bottom: 25px;
+        .card-title{
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .card-more{
+            display: inline-block;
+            border-bottom: 1px solid $pink-color;
+            text-decoration: none;
+            color: $pink-color;
+            transition: 1s all;
+            margin-bottom: 10px;
+            &:hover{
+                color: $dark-blue-color;
+                border-color: $dark-blue-color;
+            }
+        }
+        .card-progress{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            height: 3px;
+            transition: 1s all;
+            &.ok{
+                background: #00a500;
+            }
+            &.warning{
+                background: #e2e209;
+            }
+            &.danger{
+                background: #ff0000;
+            }
+        }
     }
     .task-list{
         margin-top: 30px;

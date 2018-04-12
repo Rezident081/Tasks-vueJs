@@ -13,7 +13,7 @@
 
 <script>
 import Time from "./header-time-component"
-
+import {EventBus} from "../../helpers/event-bus.js"
 export default {
     components:{
         Time
@@ -31,7 +31,9 @@ export default {
     },
     computed:{
         seconds() {
+            EventBus.$emit('get-second',  this.now.getTime())
             return this.now.getSeconds();
+
         },
 
         minutes() {

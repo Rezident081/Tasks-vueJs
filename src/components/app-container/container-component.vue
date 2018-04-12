@@ -1,15 +1,18 @@
 <template>
-    <div id="app-container">
+    <div id="app-container" class="container-fluid">
         <div class="row">
-            <div class="col-lg-9">
+            <div class="col-xl-9">
                 <Header />
                 <Main />
             </div>
-            <div class="aside col-lg-3">
+            <div class="aside col-xl-3">
                 123
             </div>
         </div>
-
+        <modal 
+                name="single-task" 
+                :adaptive="true">
+        </modal>
     </div>
 </template>
 
