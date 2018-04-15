@@ -8,20 +8,28 @@
             :month="month"
             :year="year"
         />
+        <TaskList 
+            :tasks = "getTasks"
+            v-if="getTasks.length"
+        />
     </div>
 </template>
 
 <script>
-import Time from "./header-time-component"
+import Time from "./header-time"
+import TaskList from "./header-tasks"
+import tasks from "../../models/tasks.json"
 import {EventBus} from "../../helpers/event-bus.js"
 export default {
     components:{
-        Time
+        Time,
+        TaskList
     },
     data(){
         return{
             now: new Date(),
-            months : ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+            months : ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            tasks: tasks
         }
     },
     created(){
@@ -31,9 +39,7 @@ export default {
     },
     computed:{
         seconds() {
-            EventBus.$emit('get-second',  this.now.getTime())
             return this.now.getSeconds();
-
         },
 
         minutes() {
@@ -54,6 +60,14 @@ export default {
 
         year(){
             return this.now.getFullYear();
+        },
+
+        getTasks(){
+            return this.tasks.filter( el => {
+                const start = new Date(el.start).getTime();
+                const end = new Date(el.stop).getTime();
+                return (this.now >= start && this.now < end);
+            })
         }
     },
     filters:{
@@ -64,6 +78,10 @@ export default {
             }
             return val.toString();
         }
+    },
+    updated(){
+        EventBus.$emit('get-second',  this.now.getTime())  
+        //EventBus.$on('send-tasks-in-progress', arr => this.tasks = arr);      
     }
 
 }

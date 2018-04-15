@@ -6,7 +6,7 @@
                 <Main />
             </div>
             <div class="aside col-xl-3">
-                123
+                <Sidebar />
             </div>
         </div>
         <modal 
@@ -19,10 +19,12 @@
 <script>
 import Header from "../app-header/header-component"
 import Main from "../app-main/main-component";
+import Sidebar from "../app-sidebar/sidebar-component";
 export default {
     components:{
         Header,
-        Main
+        Main,
+        Sidebar
     }
 
 }

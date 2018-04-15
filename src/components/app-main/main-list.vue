@@ -1,7 +1,7 @@
 <template>
     <div class="row task-list">
         <ListItem 
-            v-for="({id, title, description, start, stop, category}) of listTasks"
+            v-for="({id, title, description, start, stop, category, status}) of tasks"
             :key="id"
             :id="id"
             :title="title"
@@ -9,38 +9,26 @@
             :category="category"
             :start="start"
             :stop="stop"
+            :now="now"
+            :status="status"
         />
     </div>
 </template>
 
 <script>
 import ListItem from "./main-list-item"
-import {EventBus} from "../../helpers/event-bus.js"
 
 export default {
-    props: ["tasks"],
+    props: ["tasks", "now"],
     components:{
         ListItem
     },
-    data(){
-        return {
-            listTasks : []
+    computed:{
+        setStatus(){
+            console.log(this.setStatus);
         }
-    },
-    created(){
-        this.filterByDate();
-        EventBus.$on('get-second', this.filterByDate);
-    },
-    methods:{
-
-        filterByDate(val = new Date().getTime()){
-            this.listTasks = this.tasks.filter(el => {
-                const endTime = new Date(el.stop).getTime();
-                return endTime >= val;
-            })
-        },
-        
     }
+
 }
 </script>
 

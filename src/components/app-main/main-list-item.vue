@@ -7,10 +7,12 @@
                 <p class="card-category">
                     <strong>Category</strong> : {{category}}
                 </p>
-                <a href="#" class="card-more" @click="showModal">More info</a>
+                <p class="card-status">
+                    <strong>Status</strong> : {{status}}
+                </p>
+                <a href="#" class="card-more">More info</a>
                 <Progress 
-                    :progress="progressPersent" 
-                    :state="changeProgressClass(progressPersent)"
+                    :progress="getProgress" 
                 />
             </div>
         </div>
@@ -23,41 +25,15 @@ import {EventBus} from "../../helpers/event-bus.js"
 
 export default {
     components:{
-        Progress
+        Progress,
     },
-    props: ['id', 'title', 'description', 'category', 'start', 'stop'],
-    data(){
-        return {
-            progressPersent : 0,
-        }
-    },
-    created(){
-        EventBus.$on('get-second', this.progressVal);
-    },
-    methods:{
-
-        showModal(e){
-            e.preventDefault();
-            this.$modal.show('single-task');
+    props: ['id', 'title', 'description', 'category', 'start', 'stop', 'now', 'status'],
+    computed:{
+        getProgress(){
+            const start = new Date(this.start).getTime();
+            const end = new Date(this.stop).getTime();
+            return Math.round( ( (this.now - start) / (end - start) ) * 100);
         },
-
-        progressVal(val){
-            const endTime = new Date(this.stop).getTime();
-            const startTime = new Date(this.start).getTime();
-            
-            this.progressPersent =  Math.round( ( (val - startTime) / (endTime - startTime) ) * 100);
-        },
-
-        changeProgressClass(val){
-
-            if (val >= 50 && val < 70) return "warning";
-            
-            if (val >= 70) return "danger";
-
-            return "ok";
-
-        }
-
     }
 }
 </script>

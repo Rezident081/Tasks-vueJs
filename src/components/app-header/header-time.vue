@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import DateNow from "./header-date-component"
+import DateNow from "./header-date"
 export default {
     props : ['hours','minutes','seconds','day','month','year'],
     components:{
