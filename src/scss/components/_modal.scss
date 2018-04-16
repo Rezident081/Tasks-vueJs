@@ -1,0 +1,73 @@
+.form-create-posts{
+    padding: 25px;
+    .form-title{
+        font-size: 25px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        &:after{
+            content: "";
+            height: 2px;
+            width: 100px;
+            background: $pink-color;
+            margin-top: 3px;
+            display: block;
+        }
+    }
+    input,textarea,select{
+        width: 100%;
+        padding: 3px 10px;
+        border: 1px solid $light-blue-color;
+        border-radius: 3px;
+        font-size: 15px;
+    }
+    textarea{
+        resize: none;
+    }
+    .mx-datepicker{
+        width: 100% !important;
+    }
+    button[type="submit"]{
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
+        display: block;
+        background: #fff;
+        border: 1px solid $pink-color;
+        padding: 10px;
+        margin-top: 30px;
+        border-radius: 35px;
+        transition: .7s all;
+        cursor: pointer;
+        &:hover{
+            background: $pink-color;
+            color: #fff;
+        }
+    }
+
+    .mx-calendar-month>a.current, .mx-calendar-table td.current, .mx-calendar-year>a.current,.mx-time-item.cur-time{
+        background: $dark-blue-color;
+    }
+
+    .modal-close{
+        float: right;
+        color: $pink-color;
+        font-weight: bold;
+        cursor: pointer;
+    }
+}
+
+.single-modal{
+    padding: 25px;
+    .single-modal--title{
+        font-weight: bold;
+        margin-bottom: 20px;
+        &:after{
+            content: "";
+            height: 2px;
+            width: 100px;
+            background: $pink-color;
+            margin-top: 3px;
+            display: block;
+        }
+    }
+}

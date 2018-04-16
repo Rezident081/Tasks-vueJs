@@ -26,7 +26,6 @@ export default {
     data(){
         return {
             tasks,
-            defaultTasks: tasks,
             now: new Date().getTime()
         }
     },
@@ -36,7 +35,7 @@ export default {
                 const start = new Date(el.start).getTime();
                 const end = new Date(el.stop).getTime();
 
-                el.status = this.setStatus(start, end)
+                el.status = this.setStatus(start, end);
 
                 return end >= this.now;
             })
@@ -44,27 +43,18 @@ export default {
     },
     methods:{
         setStatus(start, end){
-            if(this.now < start) return 'Publish'
             if(this.now >= start && this.now < end) return 'In progress';
-            return 'Ended';
+            if(this.now >= end) return 'Ended';
+            return 'Publish';
         },
-        sendTaskInProgress(){
-            const tasks = this.tasks.filter( el => {
-                const start = new Date(el.start).getTime();
-                const end = new Date(el.stop).getTime();
-                return (this.now >= start && this.now < end);
-            })
-            if(tasks.length){
-                EventBus.$emit('send-tasks-in-progress', tasks);
-            }
-
+        addTasks(obj){
+            obj = Object.assign( obj, { id: this.tasks.length + 1 } );
+            this.tasks.push(obj);
         }
     },
     created(){
         EventBus.$on('get-second', val => this.now = val )
-    },
-    updated(){
-        this.sendTaskInProgress();
+        EventBus.$on('create-new-task', this.addTasks);
     }
 
 }

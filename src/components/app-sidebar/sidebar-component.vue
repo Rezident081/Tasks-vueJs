@@ -1,6 +1,13 @@
 <template>
     <div>
-        <Title :text="`Past tasks`" @clearTasks="handleClear" />
+        <div class="row d-flex align-items-end aside-header">
+            <div class="col-md-8 no-padding">
+                <Title :text="`Past tasks`" />
+            </div>
+            <div class="col-md-4 no-padding">
+                <ClearBtn @clearTasks="handleClear" v-if="getCancelTasks.length" />
+            </div>
+        </div>
         <List :tasks="getCancelTasks" />
     </div>
 </template>
@@ -9,17 +16,18 @@
 import Title from "./sidebar-title"
 import List from "./sidebar-list"
 import tasks from "../../models/tasks.json"
+import ClearBtn from "./sidebar-clear-btn"
 import {EventBus} from "../../helpers/event-bus.js"
 
 export default {
     components:{
         Title,
-        List
+        List,
+        ClearBtn
     },
     data(){
         return {
             tasks,
-            defaultTasks: tasks,
             now : new Date().getTime()
         }
     },
@@ -34,7 +42,7 @@ export default {
     methods:{
         handleClear(val){
             if(val){
-                this.tasks = []
+                //this.tasks = []
             }
         }
     },

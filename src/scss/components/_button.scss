@@ -1,0 +1,25 @@
+.button-add-container{
+    position: fixed;
+    right: 50px;
+    bottom: 25px;
+    background: $blue-color;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    text-align: center;
+    border:1px solid $light-blue-color;
+    transition: .5s all;
+    a{
+        font-size: 41px;
+        text-decoration: none;
+        display: block;
+        height: 100%;
+    }
+    &:hover{
+        background: $dark-blue-color;
+        border-color: #fff;
+        a{
+            color: #fff;
+        }
+    }
+}

@@ -22,13 +22,7 @@ export default {
     props: ["tasks", "now"],
     components:{
         ListItem
-    },
-    computed:{
-        setStatus(){
-            console.log(this.setStatus);
-        }
     }
-
 }
 </script>
 

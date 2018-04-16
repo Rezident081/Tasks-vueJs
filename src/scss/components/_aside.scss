@@ -1,16 +1,19 @@
 .aside{
     background: $dark-blue-color;
     padding: 0 30px;
+    .aside-header{
+        margin: 35px 0 25px;
+    }
     h2{
         color: #fff;
-        margin: 42px 0 15px;
-        span{
-            font-size: 14px;
-            font-weight: normal;
-            float: right;
-            padding: 17px 0 0;
-            cursor: pointer;
-        }
+        margin: 0;
+    }
+    .clear-task-button{
+        font-size: 14px;
+        font-weight: normal;
+        padding: 17px 0 0;
+        cursor: pointer;
+        color:#fff;
     }
     .card{
         margin-bottom: 25px;

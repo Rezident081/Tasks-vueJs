@@ -10,7 +10,7 @@
                 <p class="card-status">
                     <strong>Status</strong> : {{status}}
                 </p>
-                <a href="#" class="card-more">More info</a>
+                <a href="#" class="card-more" @click.prevent="modalHandler">More info</a>
                 <Progress 
                     :progress="getProgress" 
                 />
@@ -34,6 +34,18 @@ export default {
             const end = new Date(this.stop).getTime();
             return Math.round( ( (this.now - start) / (end - start) ) * 100);
         },
+    },
+    methods:{
+        modalHandler(){
+            this.$modal.show('single-modal', {
+                title : this.title,
+                description : this.description,
+                category : this.category,
+                start : this.start,
+                stop : this.stop,
+                status : this.status
+            });
+        }
     }
 }
 </script>

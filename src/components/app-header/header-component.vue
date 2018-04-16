@@ -29,13 +29,8 @@ export default {
         return{
             now: new Date(),
             months : ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            tasks: tasks
+            tasks
         }
-    },
-    created(){
-        setInterval(() => {
-            this.now = new Date()
-        },1000);
     },
     computed:{
         seconds() {
@@ -66,6 +61,7 @@ export default {
             return this.tasks.filter( el => {
                 const start = new Date(el.start).getTime();
                 const end = new Date(el.stop).getTime();
+
                 return (this.now >= start && this.now < end);
             })
         }
@@ -79,9 +75,13 @@ export default {
             return val.toString();
         }
     },
-    updated(){
-        EventBus.$emit('get-second',  this.now.getTime())  
-        //EventBus.$on('send-tasks-in-progress', arr => this.tasks = arr);      
+    created(){
+        setInterval(() => {
+            this.now = new Date()
+        },1000);
+    },
+    beforeUpdate(){
+        EventBus.$emit('get-second',  this.now.getTime());  
     }
 
 }
