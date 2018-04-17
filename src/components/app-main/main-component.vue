@@ -32,29 +32,26 @@ export default {
     computed:{
         getTasks(){
             return this.tasks.filter( el => {
-                const start = new Date(el.start).getTime();
                 const end = new Date(el.stop).getTime();
-
-                el.status = this.setStatus(start, end);
-
-                return end >= this.now;
+                return el.isActive && this.now < end;
             })
         }
     },
     methods:{
-        setStatus(start, end){
-            if(this.now >= start && this.now < end) return 'In progress';
-            if(this.now >= end) return 'Ended';
-            return 'Publish';
-        },
         addTasks(obj){
             obj = Object.assign( obj, { id: this.tasks.length + 1 } );
             this.tasks.push(obj);
+        },
+        removeTask(id){
+            for(let i = 0, n = this.tasks.length; i < n; i++){
+                if( this.tasks[i].id === id ) this.tasks[i].isActive = false;
+            }
         }
     },
     created(){
-        EventBus.$on('get-second', val => this.now = val )
+        EventBus.$on('get-second', val => this.now = val );
         EventBus.$on('create-new-task', this.addTasks);
+        EventBus.$on('get-del-id-task', this.removeTask);
     }
 
 }

@@ -70,4 +70,26 @@
             display: block;
         }
     }
+    .modal-close{
+        float: right;
+        color: $pink-color;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .delete-task-btn{
+        display: inline-block;
+        padding: 5px 15px;
+        margin: 20px 0px 5px;
+        background: $pink-color;
+        color: #fff;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: .7s all;
+        &:hover{
+            color: $pink-color;
+            background: none;
+            border-bottom-color: $pink-color;
+        }
+    }
 }

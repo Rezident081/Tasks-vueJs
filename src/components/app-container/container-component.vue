@@ -24,6 +24,7 @@ import Sidebar from "../app-sidebar/sidebar-component";
 import Button from "../app-button/button-add";
 import FormModal from "../app-modal/modal-form";
 import SingleModal from "../app-modal/modal-single";
+
 export default {
     components:{
         Header,
@@ -33,7 +34,6 @@ export default {
         FormModal,
         SingleModal
     }
-
 }
 </script>
 

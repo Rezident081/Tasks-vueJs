@@ -20,6 +20,7 @@ import Time from "./header-time"
 import TaskList from "./header-tasks"
 import tasks from "../../models/tasks.json"
 import {EventBus} from "../../helpers/event-bus.js"
+
 export default {
     components:{
         Time,
@@ -62,15 +63,14 @@ export default {
                 const start = new Date(el.start).getTime();
                 const end = new Date(el.stop).getTime();
 
-                return (this.now >= start && this.now < end);
+                return this.now >= start && this.now < end && el.isActive;
             })
         }
     },
     filters:{
         twoDigids(val){
-            if(val.toString().length <= 1)
-            {
-                return "0"+val.toString();
+            if(val.toString().length <= 1){
+                return "0" + val.toString();
             }
             return val.toString();
         }

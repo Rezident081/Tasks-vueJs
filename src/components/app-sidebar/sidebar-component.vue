@@ -1,14 +1,14 @@
 <template>
     <div>
         <div class="row d-flex align-items-end aside-header">
-            <div class="col-md-8 no-padding">
+            <div class="col-md-8 col-8 no-padding">
                 <Title :text="`Past tasks`" />
             </div>
-            <div class="col-md-4 no-padding">
-                <ClearBtn @clearTasks="handleClear" v-if="getCancelTasks.length" />
+            <div class="col-md-4 col-4 no-padding text-right">
+                <ClearBtn @clearTasks="handlerClear" v-if="getTasks.length" />
             </div>
         </div>
-        <List :tasks="getCancelTasks" />
+        <List :tasks="getTasks" />
     </div>
 </template>
 
@@ -27,27 +27,29 @@ export default {
     },
     data(){
         return {
-            tasks,
+            tasks : Object.assign(tasks),
             now : new Date().getTime()
         }
     },
     computed:{
-        getCancelTasks( ){
+        getTasks( ){
             return this.tasks.filter( el => {
-                const endTime = new Date(el.stop).getTime();
-                return endTime < this.now;
+                const end = new Date(el.stop).getTime();
+                if( this.now >= end ) el.isActive = false;
+                return !el.isActive;
             })
         }
     },
     methods:{
-        handleClear(val){
-            if(val){
-                //this.tasks = []
-            }
+        handlerClear(val){
+            this.tasks = this.tasks.filter( el => {
+                return el.isActive;
+            })
         }
     },
     created(){
-        EventBus.$on('get-second', val => this.now = val)
+        EventBus.$on('get-second', val => this.now = val);
+           
     }
 }
 </script>

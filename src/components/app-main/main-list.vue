@@ -1,16 +1,10 @@
 <template>
     <div class="row task-list">
         <ListItem 
-            v-for="({id, title, description, start, stop, category, status}) of tasks"
-            :key="id"
-            :id="id"
-            :title="title"
-            :description="description"
-            :category="category"
-            :start="start"
-            :stop="stop"
-            :now="now"
-            :status="status"
+            v-for="task of tasks"
+            :key = "task.id"
+            :task = "task"
+            :now = "now"
         />
     </div>
 </template>

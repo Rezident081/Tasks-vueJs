@@ -5,7 +5,8 @@
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         "category" : "Facebook hotfix",
         "start" : "2018-04-16 12:36",
-        "stop" : "2018-04-16 20:44"
+        "stop" : "2018-04-17 20:44",
+        "isActive" : true
     },
     {
         "id" : 2,
@@ -13,7 +14,8 @@
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         "category" : "Youtube",
         "start" : "2018-04-16 12:38",
-        "stop" : "2018-04-16 20:44"
+        "stop" : "2018-04-17 13:44",
+        "isActive" : true
     },
     {
         "id" : 3,
@@ -21,6 +23,7 @@
         "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         "category" : "Exmo",
         "start" : "2018-04-16 18:25",
-        "stop" : "2018-04-16 21:13"
+        "stop" : "2018-04-17 14:29",
+        "isActive" : true
     }
 ]

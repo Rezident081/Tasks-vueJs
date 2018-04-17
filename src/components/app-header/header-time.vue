@@ -1,11 +1,11 @@
 <template>
     <div class="row time-component">
-            <div class="col-xl-2 col-lg-3 time">
+            <div class="col-xl-3 col-md-6 col-12 time">
                 <span class="hours">{{hours}}</span>
                 <span class="minutes">{{minutes}}</span>
                 <span class="seconds">{{seconds}}</span>
             </div>
-            <div class="col-xl-10 col-lg-9 date">
+            <div class="col-xl-8 col-md-6 col-12 date">
                 <DateNow
                     :day="day"
                     :month="month"

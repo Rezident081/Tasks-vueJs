@@ -65,11 +65,12 @@ export default {
         submitHandler(){
             if(this.title && this.description && this.category && this.range) {
                 EventBus.$emit('create-new-task', {
-                    "title" : this.title,
-                    "description" : this.description,
-                    "category" : this.category,
-                    "start" : this.range[0],
-                    "stop" : this.range[1]
+                    title : this.title,
+                    description : this.description,
+                    category : this.category,
+                    start : this.range[0],
+                    stop : this.range[1],
+                    isActive : true
                 });
                 this.$modal.hide('form-modal');
             }
