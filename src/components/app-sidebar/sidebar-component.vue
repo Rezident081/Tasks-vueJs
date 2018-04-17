@@ -8,14 +8,14 @@
                 <ClearBtn @clearTasks="handlerClear" v-if="getTasks.length" />
             </div>
         </div>
-        <List :tasks="getTasks" />
+        <List :tasks="getTasks" /> 
     </div>
 </template>
 
 <script>
+import Tasks from "../../services/Tasks"
 import Title from "./sidebar-title"
 import List from "./sidebar-list"
-import tasks from "../../models/tasks.json"
 import ClearBtn from "./sidebar-clear-btn"
 import {EventBus} from "../../helpers/event-bus.js"
 
@@ -27,29 +27,25 @@ export default {
     },
     data(){
         return {
-            tasks : Object.assign(tasks),
+            tasks : new Tasks(),
             now : new Date().getTime()
         }
     },
     computed:{
         getTasks( ){
-            return this.tasks.filter( el => {
-                const end = new Date(el.stop).getTime();
-                if( this.now >= end ) el.isActive = false;
-                return !el.isActive;
-            })
+           return this.tasks.getEndTasks( this.now );
         }
     },
     methods:{
         handlerClear(val){
-            this.tasks = this.tasks.filter( el => {
-                return el.isActive;
-            })
-        }
+            if(val){
+                this.tasks.deleteEndTasks();
+            }
+        },
     },
     created(){
         EventBus.$on('get-second', val => this.now = val);
-           
+        console.log(this.tasks);
     }
 }
 </script>

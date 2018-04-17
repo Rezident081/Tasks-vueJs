@@ -1,14 +1,14 @@
 <template>
     <div class="app-header">
-        <Time 
-            :hours="hours | twoDigids"
-            :minutes="minutes | twoDigids"
-            :seconds="seconds | twoDigids"
-            :day="day"
-            :month="month"
-            :year="year"
+        <Clock 
+            :hours = "now.getHours()"
+            :minutes = "now.getMinutes()"
+            :seconds = "now.getSeconds()"
+            :day = "now.getDays()"
+            :month = "now.getMonths()"
+            :year = "now.getYears()"
         />
-        <TaskList 
+        <TasksList 
             :tasks = "getTasks"
             v-if="getTasks.length"
         />
@@ -16,72 +16,35 @@
 </template>
 
 <script>
-import Time from "./header-time"
-import TaskList from "./header-tasks"
-import tasks from "../../models/tasks.json"
+import Tasks from "../../services/Tasks";
+import Time from "../../services/Time";
+import Clock from "./header-clock";
+import TasksList from "./header-tasks";
 import {EventBus} from "../../helpers/event-bus.js"
 
 export default {
     components:{
-        Time,
-        TaskList
+        Clock,
+        TasksList
     },
     data(){
         return{
-            now: new Date(),
-            months : ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            tasks
+            now: new Time(),
+            tasks: new Tasks()
         }
     },
-    computed:{
-        seconds() {
-            return this.now.getSeconds();
-        },
 
-        minutes() {
-            return this.now.getMinutes();
-        },
-
-        hours() {
-            return this.now.getHours();
-        },
-
-        day(){
-            return this.now.getDate();
-        },
-
-        month(){
-            return this.months[this.now.getMonth()];
-        },
-
-        year(){
-            return this.now.getFullYear();
-        },
-
+    computed : {
         getTasks(){
-            return this.tasks.filter( el => {
-                const start = new Date(el.start).getTime();
-                const end = new Date(el.stop).getTime();
-
-                return this.now >= start && this.now < end && el.isActive;
-            })
-        }
-    },
-    filters:{
-        twoDigids(val){
-            if(val.toString().length <= 1){
-                return "0" + val.toString();
-            }
-            return val.toString();
+            return this.tasks.getProgressTasks( this.now.getMilliseconds() );
         }
     },
     created(){
-        setInterval(() => {
-            this.now = new Date()
-        },1000);
+        console.log();
+        setInterval(() => this.now = new Time() ,1000);
     },
     beforeUpdate(){
-        EventBus.$emit('get-second',  this.now.getTime());  
+        EventBus.$emit('get-second',  this.now.getMilliseconds());  
     }
 
 }

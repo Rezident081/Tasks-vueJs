@@ -1,6 +1,6 @@
 <template>
     <div class="header-tasks-list animated fadeIn">
-        <p>Taksk in progress:</p>
+        <p>Task in progress:</p>
         <ul>
             <li v-for="task of tasks" :key="task.id">
                 <a href="#" @click.prevent="openModal(task)">{{task.title}}</a>
