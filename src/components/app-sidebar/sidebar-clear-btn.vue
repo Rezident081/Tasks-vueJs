@@ -6,7 +6,7 @@
 export default {
     methods:{
         clearTasks(){
-            this.$emit('clearTasks', true);
+            this.$emit('clearTasks');
         }
     }
 }

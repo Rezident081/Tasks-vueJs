@@ -70,6 +70,7 @@ export default {
                     category : this.category,
                     start : this.range[0],
                     stop : this.range[1],
+                    status : 'Publish',
                     isActive : true
                 });
                 this.$modal.hide('form-modal');

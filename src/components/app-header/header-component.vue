@@ -36,11 +36,13 @@ export default {
 
     computed : {
         getTasks(){
-            return this.tasks.getProgressTasks( this.now.getMilliseconds() );
+            const tasks = this.tasks.getTaks(this.now.getMilliseconds());
+            return tasks.filter( el => {
+                return el.status === 'In progress';
+            }) 
         }
     },
     created(){
-        console.log();
         setInterval(() => this.now = new Time() ,1000);
     },
     beforeUpdate(){

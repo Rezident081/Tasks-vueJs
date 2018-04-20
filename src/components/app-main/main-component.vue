@@ -32,13 +32,24 @@ export default {
     },
     computed:{
         getTasks(){
-            return this.tasks.getPublishTasks( this.now );
+            const tasks = this.tasks.getTaks( this.now );
+            return tasks.filter( el => {
+                return el.status !== 'Ended';
+            });
+        }
+    },
+    methods:{
+        deleteTask(id){
+            this.tasks.moveToTrash(id);
+        },
+        createTask(obj){
+            this.tasks.addTask(obj);
         }
     },
     created(){
         EventBus.$on('get-second', val => this.now = val );
-        EventBus.$on('create-new-task', this.tasks.addTask.bind(this.tasks));
-        EventBus.$on('get-del-id-task', this.tasks.moveToCancel.bind(this.tasks));
+        EventBus.$on('create-new-task', this.createTask);
+        EventBus.$on('get-del-id-task', this.deleteTask);
     }
 
 }

@@ -33,19 +33,19 @@ export default {
     },
     computed:{
         getTasks( ){
-           return this.tasks.getEndTasks( this.now );
+            const tasks = this.tasks.getTaks( this.now );
+            return tasks.filter( el => {
+                return el.status === 'Ended'
+            })
         }
     },
     methods:{
-        handlerClear(val){
-            if(val){
-                this.tasks.deleteEndTasks();
-            }
+        handlerClear(){
+            this.tasks.removeNotActive();
         },
     },
     created(){
         EventBus.$on('get-second', val => this.now = val);
-        console.log(this.tasks);
     }
 }
 </script>

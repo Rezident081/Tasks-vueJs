@@ -5,30 +5,21 @@ export default class Tasks {
         this.tasks = tasks;
     }
 
-    getEndTasks(now){
-        return this.tasks.filter( el => {
-            const stop = new Date(el.stop).getTime();
-            if(now > stop) el.isActive = false;
-
-            return !el.isActive;
+    getTaks(now){
+        return this.tasks.map( el => {
+            const stop = new Date( el.stop ).getTime();
+            const start = new Date( el.start ).getTime();
+            this.setStatus(el, start, stop, now);
+            return el;
         });
     }
 
-    getProgressTasks(now){
-        return this.tasks.filter( el => {
-            const stop = new Date(el.stop).getTime();
-            const start = new Date(el.start).getTime();
-
-            return now >= start && now < stop && el.isActive;
-        });
-    }
-
-    getPublishTasks(now){
-        return this.tasks.filter( el => {
-            const stop = new Date(el.stop).getTime();
-
-            return now < stop && el.isActive;
-        });
+    setStatus(el, start, stop, now){
+        if( now < start ) el.status = 'Publish';
+        if( now >= start && now < stop) el.status = 'In progress';
+        if( !el.isActive || now >= stop ){
+            el.status = 'Ended';
+        }
     }
 
     addTask(obj){
@@ -36,19 +27,17 @@ export default class Tasks {
         this.tasks.push(obj);
     }
 
-    moveToCancel(id){
-        for(let i = 0, n = this.tasks.length; i < n; i++){
-            if( this.tasks[i].id === id ) this.tasks[i].isActive = false;
-        }
+    moveToTrash(id){
+        this.tasks = this.tasks.map( el => {
+            if(el.id === id) el.isActive = false;
+            return el;
+        })
     }
 
-    deleteEndTasks(){
-        let i = this.tasks.length;
-        while(i--){
-            if(!this.tasks[i].isActive){
-                this.tasks.pop();
-            }
-        }
+    removeNotActive(){
+        this.tasks = this.tasks.filter( el => {
+            return el.status !== 'Ended';
+        });
     }
     
 }
