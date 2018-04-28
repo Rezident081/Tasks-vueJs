@@ -32,15 +32,15 @@ export default {
     },
     computed:{
         getTasks(){
-            const tasks = this.tasks.getTaks( this.now );
-            return tasks.filter( el => {
-                return el.status !== 'Ended';
-            });
+            return this.tasks.getTaks().filter(el => {
+                const stop = new Date(el.stop).getTime();
+                return this.now < stop && !el.completed;
+            })
         }
     },
     methods:{
-        deleteTask(id){
-            this.tasks.moveToTrash(id);
+        removeTask(id){
+            this.tasks.removeTask(id);
         },
         createTask(obj){
             this.tasks.addTask(obj);
@@ -49,7 +49,7 @@ export default {
     created(){
         EventBus.$on('get-second', val => this.now = val );
         EventBus.$on('create-new-task', this.createTask);
-        EventBus.$on('get-del-id-task', this.deleteTask);
+        EventBus.$on('get-del-id-task', this.removeTask);
     }
 
 }

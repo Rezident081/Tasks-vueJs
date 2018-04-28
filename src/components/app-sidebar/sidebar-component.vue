@@ -33,15 +33,15 @@ export default {
     },
     computed:{
         getTasks( ){
-            const tasks = this.tasks.getTaks( this.now );
-            return tasks.filter( el => {
-                return el.status === 'Ended'
+            return this.tasks.getTaks().filter(el => {
+                const stop = new Date(el.stop).getTime();
+                return this.now >= stop || el.completed;
             })
         }
     },
     methods:{
         handlerClear(){
-            this.tasks.removeNotActive();
+            this.tasks.removeAllCompletedTasks();
         },
     },
     created(){

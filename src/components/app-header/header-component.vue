@@ -36,10 +36,11 @@ export default {
 
     computed : {
         getTasks(){
-            const tasks = this.tasks.getTaks(this.now.getMilliseconds());
-            return tasks.filter( el => {
-                return el.status === 'In progress';
-            }) 
+            return this.tasks.getTaks().filter(el => {
+                const start = new Date(el.start).getTime();
+                const stop = new Date(el.stop).getTime();
+                return this.now.getMilliseconds() >= start && this.now.getMilliseconds() < stop && !el.completed;
+            })
         }
     },
     created(){

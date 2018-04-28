@@ -7,9 +7,6 @@
                 <p class="card-category">
                     <strong>Category</strong> : {{task.category}}
                 </p>
-                <p class="card-status">
-                    <strong>Status</strong> : {{task.status}}
-                </p>
                 <a href="#" class="card-more" @click.prevent="modalHandler">More info</a>
                 <Progress 
                     :progress="getProgress" 
